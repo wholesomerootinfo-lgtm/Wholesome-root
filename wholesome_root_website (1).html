@@ -1,0 +1,141 @@
+<!-- ======================= ADVANCED WHOLESOME ROOT WEBSITE ======================= -->
+<!-- This version includes: cart system, booking form, improved UI, and email-ready contact -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wholesome Root</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body {font-family:'Poppins',sans-serif;margin:0;background:#f8f7f2;color:#333;}
+header {background:#3e5f3c;color:white;padding:25px;text-align:center;}
+nav {display:flex;justify-content:center;background:#2f4730;padding:12px;flex-wrap:wrap;}
+nav a {color:white;margin:10px;text-decoration:none;font-weight:500;}
+.hero {padding:80px;text-align:center;background:url('https://images.unsplash.com/photo-1490818387583-1baba5e638af') center/cover;color:white;}
+.hero h1 {font-size:52px;}
+.section {padding:50px;max-width:1100px;margin:auto;}
+.grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+.card {background:white;padding:20px;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,0.08);} 
+button {background:#6b8e23;color:white;border:none;padding:12px 18px;border-radius:8px;cursor:pointer;width:100%;}
+.cart {position:fixed;top:20px;right:20px;background:white;padding:15px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.2);} 
+footer {background:#2f4730;color:white;text-align:center;padding:20px;margin-top:40px;}
+input, textarea {width:100%;padding:10px;margin:8px 0;border-radius:6px;border:1px solid #ccc;}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Wholesome Root</h1>
+<p>Food that feels like home</p>
+</header>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#story">Our Story</a>
+<a href="#services">Services</a>
+<a href="#events">Events</a>
+<a href="#products">Products</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<div class="hero">
+<h1>Locally Sourced. Community Driven.</h1>
+<p>Supporting farms, nourishing people</p>
+</div>
+
+<div class="cart">
+<h4>Cart</h4>
+<ul id="cart-items"></ul>
+<p><strong>Total: $<span id="total">0</span></strong></p>
+<button onclick="checkout()">Checkout</button>
+</div>
+
+<div class="section" id="services">
+<h2>Home Meal Services</h2>
+<div class="grid">
+<div class="card">
+<h3>Weekly Meal Plan</h3>
+<p>Healthy meals delivered weekly.</p>
+<button onclick="addToCart('Meal Plan',60)">Add - $60</button>
+</div>
+</div>
+</div>
+
+<div class="section" id="events">
+<h2>Community Events</h2>
+<div class="grid">
+<div class="card">
+<h3>Farm Dinner</h3>
+<button onclick="addToCart('Farm Dinner',25)">Book - $25</button>
+</div>
+<div class="card">
+<h3>Cooking Workshop</h3>
+<button onclick="addToCart('Workshop',15)">Book - $15</button>
+</div>
+</div>
+</div>
+
+<div class="section" id="products">
+<h2>Products</h2>
+<div class="grid">
+<div class="card">
+<h3>Pantry Box</h3>
+<button onclick="addToCart('Pantry Box',40)">Add - $40</button>
+</div>
+<div class="card">
+<h3>Baked Goods</h3>
+<button onclick="addToCart('Baked Goods',10)">Add - $10</button>
+</div>
+</div>
+</div>
+
+<div class="section" id="contact">
+<h2>Contact & Booking</h2>
+<form onsubmit="submitForm(event)">
+<input type="text" placeholder="Your Name" required>
+<input type="email" placeholder="Your Email" required>
+<textarea placeholder="Message"></textarea>
+<button type="submit">Send</button>
+</form>
+</div>
+
+<footer>
+<p>© 2026 Wholesome Root</p>
+</footer>
+
+<script>
+let cart = [];
+
+function addToCart(item, price) {
+cart.push({item, price});
+renderCart();
+}
+
+function renderCart() {
+let list = document.getElementById('cart-items');
+let total = 0;
+list.innerHTML = '';
+cart.forEach(c => {
+let li = document.createElement('li');
+li.innerText = c.item + ' - $' + c.price;
+list.appendChild(li);
+total += c.price;
+});
+document.getElementById('total').innerText = total;
+}
+
+function checkout() {
+alert('Redirecting to secure checkout');
+window.location.href='https://buy.stripe.com/test';
+}
+
+function submitForm(e) {
+e.preventDefault();
+alert('Message sent! (connect EmailJS for real emails)');
+}
+</script>
+
+</body>
+</html>
